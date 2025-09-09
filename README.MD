@@ -102,13 +102,16 @@ Ignore file: .dirtree.ignore
 
 📁 .
 ├── 📁 src
-│   ├── 📄 index.js
+│   ├── 📄 index.ts
+│   └── 📄 test.ts
 │   └── 📁 components
 │       ├── 📄 Header.js
 │       └── 📄 Footer.js
+├── 📄 .dirtree.ignore
 ├── 📄 package.json
-├── 📄 README.md
-└── 📄 .dirtree.ignore
+├── 📄 README.MD
+└── 📄 tsconfig.json
+
 ```
 
 # Run tests
