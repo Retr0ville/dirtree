@@ -1,6 +1,6 @@
 {
   "name": "dir3",
-  "version": "1.0.1",
+  "version": "1.0.2a",
   "description": "Generate directory tree files with customizable ignore patterns",
   "type": "module",
   "exports": "./dist/index.js",
@@ -8,7 +8,7 @@
     "dir3": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc dir3",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build",
     "test": "npm run build && node dist/test.js"
@@ -30,8 +30,9 @@
   "author": "retr0ville",
   "license": "MIT",
   "files": [
-    "dist/**/*",
-    "README.md"
+    "dist/index.js",
+    "README.md",
+    "LICENCE"
   ],
   "dependencies": {
     "inquirer": "^9.2.0"
