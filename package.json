@@ -1,6 +1,6 @@
 {
   "name": "dir3",
-  "version": "1.0.2a",
+  "version": "1.0.2b",
   "description": "Generate directory tree files with customizable ignore patterns",
   "type": "module",
   "exports": "./dist/index.js",

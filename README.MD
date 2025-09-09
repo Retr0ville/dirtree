@@ -29,6 +29,13 @@ This will:
 2. If not found, prompt you to create one with default patterns or custom patterns
 3. Generate a `directory-tree.txt` file with the directory structure
 
+## Use case example
+add dir3 to your `package.json` scripts to generate a directory tree after building your project for new team members (or your future self) to see the project structure at a glance:
+
+```bash
+"build": "tsc && dir3"
+```
+
 ### First Run
 
 On the first run in a directory, you'll be prompted:
