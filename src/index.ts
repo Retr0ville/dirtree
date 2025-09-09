@@ -208,7 +208,7 @@ class DirTreeGenerator {
   }
 
   private async writeTreeToFile(tree: string): Promise<void> {
-    const header = `Directory Tree - Generated on ${new Date().toISOString()}\n` +
+    const header = `Directory Tree - Generated with dirtree on ${new Date().toISOString()}\n` +
                   `Root: ${path.resolve('.')}\n` +
                   `Ignore file: ${this.ignoreFile}\n` +
                   '─'.repeat(80) + '\n\n';

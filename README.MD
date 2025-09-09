@@ -95,7 +95,7 @@ The generated `directory-tree.txt` contains:
 
 Example output:
 ```
-Directory Tree - Generated on 2025-01-15T10:30:00.000Z
+Directory Tree - Generated with dirtree on 2025-01-15T10:30:00.000Z
 Root: /Users/example/my-project
 Ignore file: .dirtree.ignore
 ────────────────────────────────────────────────────────────────────────────────
