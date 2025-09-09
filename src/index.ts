@@ -74,7 +74,7 @@ class DirTreeGenerator {
     depth: number = 0
   ): Promise<string> {
     // Prevent infinite recursion and very deep trees
-    if (depth > 25) {
+    if (depth > 50) {
       return prefix + '└── [MAX DEPTH REACHED]\n';
     }
 
