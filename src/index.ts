@@ -22,7 +22,7 @@ class DirTreeGenerator {
   private readonly ignoreFile: string = '.dirtree.ignore';
   private readonly outputFile: string = 'directory-tree.txt';
   private ignorePatterns: RegExp[] = [];
-  private readonly defaultIgnores: readonly string[] = [
+  static readonly defaultIgnores: readonly string[] = [
     'node_modules',
     '.git',
     '.svn',
@@ -106,7 +106,7 @@ class DirTreeGenerator {
   }
 
   private async createDefaultIgnoreFile(): Promise<void> {
-    const content = this.defaultIgnores.join('\n') + '\n';
+    const content = DirTreeGenerator.defaultIgnores.join('\n') + '\n';
     await fs.writeFile(this.ignoreFile, content, 'utf8');
   }
 
@@ -218,8 +218,16 @@ class DirTreeGenerator {
   }
 }
 
-// Main execution
-if (require.main === module) {
+// Main execution (ESM-compatible, Node 18)
+
+function isMainModule(): boolean {
+  // Remove 'file://' prefix and normalize both paths to fix windows backslash quirkiness
+  const metaPath = path.normalize(import.meta.url.replace('file:///', ''));
+  const argvPath = process.argv[1] ? path.normalize(process.argv[1]) : '';
+  return metaPath === argvPath;
+}
+
+if (isMainModule()) {
   const generator = new DirTreeGenerator();
   generator.init().catch(error => {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
