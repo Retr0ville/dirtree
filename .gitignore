@@ -43,3 +43,4 @@ test-output/
 test-temp/
 directory-tree.txt
 .dirtree.ignore
+src/intemp.ts
