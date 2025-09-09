@@ -83,7 +83,7 @@ class DirTreeGenerator {
       ]);
 
       if (answers.createIgnoreFile) {
-        // await this.createDefaultIgnoreFile();
+        await this.createDefaultIgnoreFile();
         console.log(`Created ${this.ignoreFile} with default patterns`);
       } else {
         const customAnswers = await inquirer.prompt<CustomPatternsAnswers>([
@@ -99,12 +99,51 @@ class DirTreeGenerator {
           ? customAnswers.customPatterns.split(',').map(p => p.trim()).filter(p => p)
           : [];
 
-        // await this.createIgnoreFile(patterns);
+        await this.createIgnoreFile(patterns);
         console.log(`Created ${this.ignoreFile} with custom patterns`);
       }
     }
   }
 
+  private async createDefaultIgnoreFile(): Promise<void> {
+    const content = this.defaultIgnores.join('\n') + '\n';
+    await fs.writeFile(this.ignoreFile, content, 'utf8');
+  }
+
+  private async createIgnoreFile(patterns: string[]): Promise<void> {
+    const content = patterns.length > 0 ? patterns.join('\n') + '\n' : '';
+    await fs.writeFile(this.ignoreFile, content, 'utf8');
+  }
+
+  private async loadIgnorePatterns(): Promise<void> {
+    try {
+      const content = await fs.readFile(this.ignoreFile, 'utf8');
+      this.ignorePatterns = content
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line && !line.startsWith('#'))
+        .map(pattern => this.createRegexFromPattern(pattern));
+    } catch {
+      this.ignorePatterns = [];
+    }
+  }
+
+  private createRegexFromPattern(pattern: string): RegExp {
+    // Convert glob-like patterns to regex
+    const escaped = pattern
+      .replace(/\./g, '\\.')
+      .replace(/\*/g, '.*')
+      .replace(/\?/g, '.');
+    
+    return new RegExp(`^${escaped}$`);
+  }
+
+  private shouldIgnore(itemName: string, itemPath: string): boolean {
+    // Check if item matches any ignore pattern
+    return this.ignorePatterns.some(regex => {
+      return regex.test(itemName) || regex.test(path.basename(itemPath));
+    });
+  }
 
   private async generateTree(
     dirPath: string, 
