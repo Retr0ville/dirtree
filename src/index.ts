@@ -220,20 +220,20 @@ class DirTreeGenerator {
 
 // Main execution (ESM-compatible, Node 18)
 
-function isMainModule(): boolean {
-  // Remove 'file://' prefix and normalize both paths to fix windows backslash quirkiness
-  const metaPath = path.normalize(import.meta.url.replace('file:///', ''));
-  const argvPath = process.argv[1] ? path.normalize(process.argv[1]) : '';
-  return metaPath === argvPath;
-}
+// function isMainModule(): boolean {
+//   // Remove 'file://' prefix and normalize both paths to fix windows backslash quirkiness
+//   const metaPath = path.normalize(import.meta.url.replace('file:///', ''));
+//   const argvPath = process.argv[1] ? path.normalize(process.argv[1]) : '';
+//   return metaPath === argvPath;
+// }
 
-if (isMainModule()) {
+// if (isMainModule()) {
   const generator = new DirTreeGenerator();
   generator.init().catch(error => {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Fatal error:', errorMessage);
     process.exit(1);
   });
-}
+// }
 
 export default DirTreeGenerator;
