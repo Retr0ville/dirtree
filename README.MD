@@ -1,4 +1,4 @@
-# DirTree
+# Dir3 - Directory Tree Generator
 
 A command-line utility to generate directory tree files with customizable ignore patterns.
 
@@ -7,13 +7,13 @@ A command-line utility to generate directory tree files with customizable ignore
 You can run this utility directly with npx without installation:
 
 ```bash
-npx dirtree
+npx dir3
 ```
 
 Or install it globally:
 
 ```bash
-npm install -g dirtree
+npm install -g dir3
 ```
 
 ## Usage
@@ -21,11 +21,11 @@ npm install -g dirtree
 Navigate to any directory and run:
 
 ```bash
-dirtree
+dir3
 ```
 
 This will:
-1. Check for a `.dirtree.ignore` file in the current directory
+1. Check for a `.dir3.ignore` file in the current directory
 2. If not found, prompt you to create one with default patterns or custom patterns
 3. Generate a `directory-tree.txt` file with the directory structure
 
@@ -34,15 +34,15 @@ This will:
 On the first run in a directory, you'll be prompted:
 
 ```
-.dirtree.ignore not found. Create with default ignore patterns? (Y/n)
+.dir3.ignore not found. Create with default ignore patterns? (Y/n)
 ```
 
-- **Yes (default)**: Creates `.dirtree.ignore` with common ignore patterns
+- **Yes (default)**: Creates `.dir3.ignore` with common ignore patterns
 - **No**: Allows you to specify custom ignore patterns
 
 ### Default Ignore Patterns
 
-The default `.dirtree.ignore` includes common directories and files that are typically excluded:
+The default `.dir3.ignore` includes common directories and files that are typically excluded:
 
 - `node_modules` - Node.js dependencies
 - `.git` - Git repository data
@@ -57,14 +57,14 @@ The default `.dirtree.ignore` includes common directories and files that are typ
 
 ## Ignore File Format
 
-The `.dirtree.ignore` file supports:
+The `.dir3.ignore` file supports:
 
 - **Exact names**: `node_modules`
 - **Wildcards**: `*.log`, `temp*`
 - **Comments**: Lines starting with `#`
 - **Empty lines**: Ignored
 
-Example `.dirtree.ignore`:
+Example `.dir3.ignore`:
 ```
 # Dependencies
 node_modules
@@ -95,9 +95,9 @@ The generated `directory-tree.txt` contains:
 
 Example output:
 ```
-Directory Tree - Generated with dirtree on 2025-01-15T10:30:00.000Z
+Directory Tree - Generated with dir3 on 2025-01-15T10:30:00.000Z
 Root: /Users/example/my-project
-Ignore file: .dirtree.ignore
+Ignore file: .dir3.ignore
 ────────────────────────────────────────────────────────────────────────────────
 
 📁 .
@@ -107,7 +107,7 @@ Ignore file: .dirtree.ignore
 │   └── 📁 components
 │       ├── 📄 Header.js
 │       └── 📄 Footer.js
-├── 📄 .dirtree.ignore
+├── 📄 .dir3.ignore
 ├── 📄 package.json
 ├── 📄 README.MD
 └── 📄 tsconfig.json

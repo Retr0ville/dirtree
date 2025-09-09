@@ -1,11 +1,11 @@
 {
-  "name": "dirtree",
-  "version": "1.0.0",
+  "name": "dir3",
+  "version": "1.0.1",
   "description": "Generate directory tree files with customizable ignore patterns",
   "type": "module",
   "exports": "./dist/index.js",
   "bin": {
-    "dirtree": "./dist/index.js"
+    "dir3": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -14,13 +14,20 @@
     "test": "npm run build && node dist/test.js"
   },
   "keywords": [
+    "make-tree",
+    "mk-tree",
+    "directory tree",
+    "dir-tree",
+    "tree-make",
+    "dir-3",
+    "mktree",
     "directory",
     "tree",
     "file-structure",
     "cli",
     "npx"
   ],
-  "author": "Retr00ville",
+  "author": "retr0ville",
   "license": "MIT",
   "files": [
     "dist/**/*",

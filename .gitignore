@@ -42,5 +42,5 @@ Thumbs.db
 test-output/
 test-temp/
 directory-tree.txt
-.dirtree.ignore
+.dir3.ignore
 src/intemp.ts
