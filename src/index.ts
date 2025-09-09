@@ -55,8 +55,8 @@ class DirTreeGenerator {
 
   async init(): Promise<void> {
     try {
-      // await this.checkAndCreateIgnoreFile();
-      // await this.loadIgnorePatterns();
+      await this.checkAndCreateIgnoreFile();
+      await this.loadIgnorePatterns();
       const tree = await this.generateTree('.');
       await this.writeTreeToFile(tree);
       console.log(`Directory tree generated successfully in ${this.outputFile}`);
@@ -66,6 +66,45 @@ class DirTreeGenerator {
       process.exit(1);
     }
   }
+
+  private async checkAndCreateIgnoreFile(): Promise<void> {
+    try {
+      await fs.access(this.ignoreFile);
+      console.log(`Using existing ${this.ignoreFile}`);
+    } catch {
+      // File doesn't exist, prompt user
+      const answers = await inquirer.prompt<IgnoreFileAnswers>([
+        {
+          type: 'confirm',
+          name: 'createIgnoreFile',
+          message: `${this.ignoreFile} not found. Create with default ignore patterns?`,
+          default: true
+        }
+      ]);
+
+      if (answers.createIgnoreFile) {
+        // await this.createDefaultIgnoreFile();
+        console.log(`Created ${this.ignoreFile} with default patterns`);
+      } else {
+        const customAnswers = await inquirer.prompt<CustomPatternsAnswers>([
+          {
+            type: 'input',
+            name: 'customPatterns',
+            message: 'Enter custom ignore patterns (comma-separated, or leave empty):\n  Alternatively close this process and create a .dirtree.ignore file manually.',
+            default: ''
+          }
+        ]);
+
+        const patterns = customAnswers.customPatterns
+          ? customAnswers.customPatterns.split(',').map(p => p.trim()).filter(p => p)
+          : [];
+
+        // await this.createIgnoreFile(patterns);
+        console.log(`Created ${this.ignoreFile} with custom patterns`);
+      }
+    }
+  }
+
 
   private async generateTree(
     dirPath: string, 
@@ -89,9 +128,9 @@ class DirTreeGenerator {
       for (const item of items) {
         const itemPath = path.join(dirPath, item.name);
         
-        // if (this.shouldIgnore(item.name, itemPath)) {
-        //   continue;
-        // }
+        if (this.shouldIgnore(item.name, itemPath)) {
+          continue;
+        }
 
         filteredItems.push({
           name: item.name,
